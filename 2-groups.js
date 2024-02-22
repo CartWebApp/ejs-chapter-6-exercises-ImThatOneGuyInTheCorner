@@ -17,21 +17,22 @@ class Group {
     return this.arr;
   }
   delete(val) {
-    // DO THIS -----------------------------------------------
+    let i = this.arr.indexOf(val);
+    let a = this.arr.slice(0, i);
+    let b = this.arr.slice(i + 1);
+    this.arr = a;
+    this.arr = this.arr.concat(a, b);
+    return this.arr;
   }
   has(val) {
-    for(o=0; o<this.arr.length; o++) {
-      if(this.arr === val) {
-        return true;
-      }
-    }
-    return false;
+    return(this.arr.includes(val));
   }
   static from(fArr) {
+    let arr = [];
     for(let j = fArr[0]; j <= fArr[1]; j++) {
-      this.arr.push(j);
+      arr.push(j);
     }
-    return this.arr;
+    return(new Group(arr));
   }
 }
 
@@ -42,7 +43,7 @@ console.log(group.has(10));
 console.log(group.has(30));
 // → false
 group.add(10);
-// group.delete(10); UNCOMMENT THIS LINE AFTER FINISHING DELETE
+group.delete(10);
 console.log(group.has(10));
 // → false
 
