@@ -30,14 +30,35 @@ class Group {
     return(this.arr.includes(val));
   }
   static from(fArr) {
-    let arr = [];
-    for(let j = fArr[0]; j <= fArr[1]; j++) {
-      arr.push(j);
-    }
-    return(new Group(arr));
+    // let arr = [];
+    // for(let j = fArr[0]; j <= fArr[1]; j++) {
+    //   arr.push(j);
+    // }
+    return(new Group(fArr));
   }
+
+  [Symbol.iterator]() {
+    return new Iteration(this);
+  };
 }
 
+
+class Iteration {
+  constructor(group) {
+    this.group = group;
+    this.pos = 0;
+  }
+
+  next() {
+    if (this.pos >= this.group.arr.length) {
+      return {done: true};
+    } else {
+      let result = {value: this.group.arr[this.pos], done: false};
+      this.pos++;
+      return result;
+    }
+  }
+}
 
 
 // Tests:
